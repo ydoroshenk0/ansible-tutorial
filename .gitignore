@@ -2,3 +2,4 @@ configs/*
 diff.all
 *DS_Store
 *.retry
+logs/*
