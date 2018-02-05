@@ -1,0 +1,30 @@
+---
+- name: Configure Network
+  gather_facts: no
+  connection: local
+  vars:
+    playbook: Configure Network
+    
+  vars_prompt:
+    - name: "target"
+      prompt: "Enter host or inventory group"
+      private: no
+    - name: "commit"
+      prompt: "Do you want to commit? (True or False)"
+      default: "False"
+      private: no  
+
+  hosts: "{{target}}"
+    
+  tasks:
+    - block:
+      - include_role:
+          name: Juniper.junos
+      - include_role:
+          name: base/cleanup-create
+      - include_role:
+          name: tutorial/chapter1
+      - include_role:
+          name: junos/junos-assemble-apply
+      - include_role:
+          name: base/show-compare

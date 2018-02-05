@@ -1,0 +1,26 @@
+---
+# junos/junos-assemble-apply
+
+- name: Assembling the configuration
+  assemble: 
+    src: configs/{{inventory_hostname}}/ 
+    dest: configs/{{inventory_hostname}}/candidate.conf
+  when: commit == "False"
+  changed_when: False
+
+- name: Installing the config via juniper_junos_config
+  juniper_junos_config:
+    host: '{{ inventory_hostname }}'
+    user: '{{ user }}'
+    
+    commit: '{{ commit }}'
+    config_mode: 'exclusive'
+    load: 'merge'
+    
+    src: '{{ playbook_dir }}/configs/{{ inventory_hostname }}/candidate.conf'
+    ignore_warning: ['statement not found']
+    timeout: 60
+    
+    diff: True
+    diffs_file: 'configs/{{ inventory_hostname }}/{{ inventory_hostname }}.diff'
+    logfile: 'logs/{{ inventory_hostname }}/junos-assemble-apply.log'

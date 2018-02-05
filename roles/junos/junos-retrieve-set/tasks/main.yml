@@ -1,0 +1,9 @@
+---
+# junos/junos-retrieve-set
+
+- name: Get config in set format
+  juniper_junos_command:
+    host: '{{ inventory_hostname }}'
+    user: '{{ user }}'
+    command: 'show configuration | display set'
+    dest: configs/retrieve/{{ inventory_hostname }}.retrieve

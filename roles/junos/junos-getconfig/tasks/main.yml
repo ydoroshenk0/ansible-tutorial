@@ -1,0 +1,13 @@
+---    
+# junos/junos-getconfig
+
+- name: Junos Get config
+  juniper_junos_config:
+    host: '{{ inventory_hostname }}'
+    user: '{{ user }}'
+    logfile: logs/{{ inventory_hostname }}/search-config.log
+    #return_output:
+    retrieve: '{{ config_type }}'
+    dest_dir: '{{ playbook_dir }}/configs/{{ inventory_hostname }}/'
+    #format: '{{ format }}' Format: set only works on Junos 12.3+
+  when: get == "y"

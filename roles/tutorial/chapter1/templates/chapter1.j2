@@ -1,0 +1,20 @@
+#jinja2: trim_blocks: True, lstrip_blocks: True
+
+{# COMMON #}
+
+system {
+
+    root-authentication{
+      encrypted-password ???; ## SECRET-DATA
+    }
+
+    host-name ???;
+    domain-name ???;
+    time-zone ???;
+    default-address-selection;
+    no-redirects;
+    no-ping-record-route;
+    no-ping-time-stamp;
+    authentication-order radius;
+
+}

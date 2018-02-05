@@ -1,0 +1,14 @@
+---
+# base/workfailed
+
+- name: Sending a failure notification
+  slack:
+    token: T024FR7H4/B49H7A9K6/RGuLdFqMNnu7QaoWIs2efPaz
+    channel: #net-alerts
+    username: Ansibot
+    icon_emoji: ":ansible:"
+    msg: "*Error:* The Playbook encountered an error"
+  when: commit == "True"
+  run_once: True
+  delegate_to: 127.0.0.1
+  changed_when: False

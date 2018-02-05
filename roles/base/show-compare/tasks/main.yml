@@ -1,0 +1,10 @@
+---
+# base/show-compare
+  
+- name: "Creating a diff file"
+  shell: more */*.diff | less > ../diff.all
+  args:
+    chdir: "{{playbook_dir}}/configs"
+  run_once: True
+  delegate_to: 127.0.0.1
+  changed_when: False

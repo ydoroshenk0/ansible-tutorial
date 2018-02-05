@@ -1,0 +1,42 @@
+---
+# base/cleanup-create
+
+- name: Removing the old config directories
+  file: 
+    path: configs/ 
+    state: absent
+  when: commit == "False"
+  run_once: True
+  delegate_to: 127.0.0.1
+  changed_when: False
+  
+- name: Removing the old log directories
+  file: 
+    path: logs/ 
+    state: absent
+  when: commit == "False"
+  run_once: True
+  delegate_to: 127.0.0.1
+  changed_when: False
+
+- name: Creating the log directories
+  file: 
+    path: logs/{{ inventory_hostname }} 
+    state: directory
+  when: commit == "False"
+  changed_when: False
+
+- name: Creating the candidate config directories
+  file: 
+    path: configs/{{ inventory_hostname }} 
+    state: directory
+  when: commit == "False"
+  changed_when: False
+  
+- name: Creating the retrieved config directory
+  file: 
+    path: configs/retrieve
+    state: directory
+  when: commit == "False"
+  changed_when: False
+  

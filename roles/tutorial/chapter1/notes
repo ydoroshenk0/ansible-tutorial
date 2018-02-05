@@ -1,0 +1,35 @@
+String and Int replacement in J2, junos syntax
+
+Ansible generates templates with a language named Jinja2
+
+Jinja2 will print word for word whatever is written in the template unless the text is nested in the following operators:
+
+A comment
+{# This is a comment #}
+
+A function
+{% if temperature > 10 %} 
+
+A variable
+{{ temperature }}
+
+For this chapter, we'll skip over functions and explore comments and variables.
+
+Variables can't be defined within a jinja template, they have to be pulled from somewhere else. 
+In this case, they are being pulled all the files nested in group_vars/
+
+There are also built-in variables that Ansible generates automatically. The most useful of the built-in variables is inventory_hostname.
+inventory_hostname carries the hostname of the device Ansible is attempting to configure. 
+If you're running Ansible against rtr-wan-bos2, then inventory_hostname == rtr-wan-bos2.
+
+Example:
+--------------------
+temperature: 100 degrees
+
+--------------------
+
+The maximum temperature that {{ inventory_hostname }} can handle is {{ temperature }}.
+
+Exercise:
+Open the template under chapter1, replace the ??? with variables and run the playbook configure-tutorial.yml to test the template.
+The command is ansible-playbook configure-tutorial.yml

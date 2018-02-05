@@ -1,0 +1,16 @@
+---
+# base/workcomplete
+  
+- name: Sending a Slack notification
+  slack:
+    token: T024FR7H4/B49H7A9K6/RGuLdFqMNnu7QaoWIs2efPaz
+    #token: T024FR7H4/B4YH11B54/R5rA2xH3bEJPJy2uiKKP5ExI
+    channel: #net-alerts
+    #channel: #net-dump
+    username: Ansibot
+    icon_emoji: ":ansible:"
+    msg: "Ansible playbook *{{ playbook }}* deployed by `{{ lookup('env','USER') }}` \n *Comment:* {{ comment }}"
+  when: commit == "True"
+  run_once: True
+  delegate_to: 127.0.0.1
+  changed_when: False

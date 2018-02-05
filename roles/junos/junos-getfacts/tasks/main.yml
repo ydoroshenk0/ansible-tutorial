@@ -1,0 +1,15 @@
+---
+# junos/junos-getfacts
+
+- name: Getting device facts
+  juniper_junos_facts:
+    host: '{{ inventory_hostname }}'
+    user: '{{ user }}'
+    #config_format: text
+    #savedir:
+  register: result
+  when: commit == "False"
+
+#- name: Printing
+#  debug:
+#    var: result

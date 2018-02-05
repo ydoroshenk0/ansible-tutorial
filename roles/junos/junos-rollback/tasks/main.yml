@@ -1,0 +1,14 @@
+---
+# junos/junos-rollback
+
+- name: Loading the rollback
+  juniper_junos_config:
+    host: '{{ inventory_hostname }}'
+    user: '{{ user }}'
+    
+    config_mode: 'exclusive'
+    rollback: '{{ rollback }}'
+    
+    diff: True
+    dest_dir: '{{ playbook_dir }}/configs/{{ inventory_hostname }}/'
+    logfile: '{{ playbook_dir }}/logs/{{ inventory_hostname }}/junos-rollback.log'  
