@@ -1,0 +1,26 @@
+### Start ###
+git init
+git remote add origin "origin"
+git pull origin master
+
+#################################### Origin
+git@github.com:fuze/network-ansible.git
+git@github.com:fuze/network-ansible-provisioning.git
+git@github.com:fuze/net-alerts.git
+git@github.com:fuze/net-cmk.git
+git@github.com:fuze/ansible-tutorial.git
+
+#################################### Working with Branches
+cd to New folder
+Pull the repo you want to modify (### Start ###)
+git branch "name"
+git checkout "name" 
+
+### Pushing branch updates to github
+git add . 
+git commit
+git push -u "remote URL" "name"
+
+### Delete Branch
+git branch -d "local_branch"
+git push origin --delete "remote_branch"
