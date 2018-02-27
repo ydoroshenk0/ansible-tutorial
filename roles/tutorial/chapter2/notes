@@ -1,0 +1,90 @@
+Control Structures are instructions that control the flow of a program.
+Conditionals are a type of Control Structure that will apply an action based on a condition.
+The two most common Conditionals are IFs and FORs.
+
+IFs verify a fact and then trigger an action.
+
+# Defining a variable
+today: monday
+
+{% if today == monday %}
+  It's the start of the week!
+{% endif %}
+
+If an IF's condition isn't met, the conditional can be redirected into two other paths: else and elif
+
+{% else %} is applied if the IF condition is not met.
+
+{% elif %} is a secondary IF that runs if the first IF failed.
+
+{% if today == "monday" %}
+  it's Monday!
+{% elif today == "tuesday" %}
+  it's Tuesday!
+{% elif today == "wednesday" %}
+  it's Humpday!
+{% else %}
+  I lost interest.
+{% endif %}
+
+Notes:
+ - "monday" vs "Monday" vs monday vs Monday
+ 
+Tests and examples: You can do much more than use the standard - + - < > == != <or>= tests
+  - AND / OR {% if month == "january" or "february" and today == "monday" %}
+  
+  - x in y > If string x is part of string y
+  
+  {% if "bdr" in inventory_hostname or "sec" in inventory_hostname %}
+    This is a core switch
+  {% endof %}
+  
+  - is defined > If there is a variable with this name.
+  - is undefined > The opposite.
+  
+  {% if port_list is defined %}
+    This router has NNIs
+  {% elif port_list is undefined %}
+    This router doesn't have NNIs.
+  {% endif %}
+  
+  - is none > If the variable exists but is empty
+  
+  {% if ntp_server is none %}
+    Looks like someone forgot to update group_vars
+  {% endif %}
+  
+  - not > Used to reverse a test
+  
+  {% if ntp_server is not none or "core" not in inventory_hostname %}
+    This is a weird kind of condition but it illustrates my point.
+  {% endif %}
+  
+  There are many more tests, these were just a few common examples.
+  
+=========================================================================
+
+{#
+#################
+  rtr-nni-bos1
+#################
+#}
+
+{% if inventory_hostname == "rtr-nni-bos1" %}
+  interfaces {
+
+    {# Conditional for loading the correct NNI #}
+    {% if basic.byob_switch == false %}
+      {% if port_list[basic.provider] is defined %}
+
+          {{ port_list[basic.provider] }} {
+            unit {{ basic.wan_vlan }} {
+              description V_wan-{{ basic.provider }}-{{ basic.customer_tag|lower }};
+              encapsulation vlan-bridge;
+              family bridge;
+              vlan-id {{ basic.wan_vlan }}
+            }
+          }
+
+      {% endif %}
+    {% endif %}

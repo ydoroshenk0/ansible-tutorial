@@ -1,0 +1,53 @@
+#jinja2: trim_blocks: True, lstrip_blocks: True
+
+
+chassis {
+
+  {# RTR-BDR ONLY #}
+    {% if ??? %}
+      redundancy {
+        graceful-switchover;
+      }
+    {% endif %}
+
+  {# SW-CORE ONLY #}
+    {% if ??? %}
+       alarm {
+         management-ethernet {
+               link-down ignore;
+           }
+       }
+    {% endif %}
+  
+  {# ANYTHING BUT OOB SWITCH #}
+  {% if ??? %}
+    FZNqos {
+      class-of-service {
+          classifiers {
+              dscp FZNqos-dscp-classifier {
+                  import default;
+                  forwarding-class FZNqos-voice-fc {
+                      loss-priority low code-points ef;
+                  }
+                  forwarding-class FZNqos-control-fc {
+                      loss-priority low code-points [ nc1 nc2 af31 cs3 af21 ];
+                  }
+                  forwarding-class FZNqos-video-fc {
+                      loss-priority low code-points af41;
+                  }
+              }
+          }
+      }
+    }
+  {% endif %}
+
+  {# Aggregated Devices #}
+    {% if ??? %}
+    aggregated-devices {
+        ethernet {
+            device-count {{ agg_device_count }};
+        }
+    }
+    {% endif %}
+
+}

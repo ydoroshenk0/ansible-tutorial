@@ -1,8 +1,6 @@
 ---
 # tests/chapter1/
 
-# Nothing to do here
-
 - name: Generating a system configuration
   template:
     src: ../templates/chapter1.j2

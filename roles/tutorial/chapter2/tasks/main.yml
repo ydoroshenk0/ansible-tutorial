@@ -1,0 +1,7 @@
+---
+# tests/chapter2/
+
+- name: Generating a system configuration
+  template:
+    src: ../templates/chapter2.j2
+    dest: configs/{{ inventory_hostname }}/chap2.conf
