@@ -64,6 +64,7 @@ Tests and examples: You can do much more than use the standard - + - < > == != <
   
 =========================================================================
 
+
 {#
 #################
   rtr-nni-bos1
@@ -88,3 +89,24 @@ Tests and examples: You can do much more than use the standard - + - < > == != <
 
       {% endif %}
     {% endif %}
+    
+=======================================================================
+
+term discard-icmp {
+    from {
+        protocol icmp;
+    }
+    then {
+        count discard-icmp;
+        discard;
+    }
+}
+term discard-unknown {
+    then {
+        count discard-unknown;
+        discard;
+    }
+}
+
+
+oublie pas le boutte avec le nouveau playbook et les licenses
