@@ -2,12 +2,12 @@ Control Structures are instructions that control the flow of a program.
 Conditionals are a type of Control Structure that will apply an action based on a condition.
 The two most common Conditionals are IFs and FORs.
 
-IFs verify a fact and then trigger an action.
+IFs verify a fact / run a test and then trigger an action.
 
 # Defining a variable
 today: monday
 
-{% if today == monday %}
+{% if today == "monday" %}
   It's the start of the week!
 {% endif %}
 
@@ -29,6 +29,16 @@ If an IF's condition isn't met, the conditional can be redirected into two other
 
 Notes:
  - "monday" vs "Monday" vs monday vs Monday
+ 
+# More vars
+today: peanut
+monday: peanut
+Monday: Peanut
+
+{% if today == monday %} Pass
+{% if today == Monday %} Fail
+{% if today == "monday" %} Fail
+{% if today == "Monday" %} Fail
  
 Tests and examples: You can do much more than use the standard - + - < > == != <or>= tests
   - AND / OR {% if month == "january" or "february" and today == "monday" %}
