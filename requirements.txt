@@ -34,7 +34,7 @@ pyeapi==0.6.1
 pyfg==0.47
 pyIOSXR==0.14
 pyPluribus==0.3.0
-PyYAML==3.11
+PyYAML==4.2b1
 scp==0.10.2
 six==1.10.0
 xmltodict==0.9.2
